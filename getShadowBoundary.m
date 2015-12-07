@@ -33,6 +33,9 @@ function[sampleset,I] = getShadowBoundary(img,mask,brushsize)
 				else
 					if sampleLength > .9 * brushsize && sampleLength < 1.5 * brushsize && initialVal ~= cPixelVal
 						%add sample to sampleset
+                        if direction == 3
+                                startCol = startCol + sampleLength - 1;
+                        end
 						sample = [startCol, startRow, sampleLength, direction];
 						sampleset = [sampleset, sample];
 						sampling = false;
@@ -88,7 +91,10 @@ function[sampleset,I] = getShadowBoundary(img,mask,brushsize)
 				else
 					if sampleLength > .9 * brushsize && sampleLength < 1.5 * brushsize && initialVal ~=cPixelVal
 						%add sample to sampleset
-						sample = [startCol, startRow, sampleLength, direction];
+						if direction == 0
+                                startRow = startRow + sampleLength - 1;
+                        end
+                        sample = [startCol, startRow, sampleLength, direction];
 						sampleset = [sampleset, sample];
 						sampling = false;
 						sampleLength = 0;
