@@ -10,4 +10,4 @@ for i = 1:ssize
     [tvals, pxvals] = getSample(s,mask);
     pxvals
 end
-Clt(tvals, pxvals);
+%Clt(tvals, pxvals);
