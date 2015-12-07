@@ -8,7 +8,6 @@ function[sampleset,I] = getShadowBoundary(img,mask,brushsize)
 	startRow = 1;
 	sampleLength = 0;
 	sampling = false;
-    %N,E,S,W 0,1,2,3
 	direction = -1; 	
 	initialVal = -1;
 	sampleset = {};
