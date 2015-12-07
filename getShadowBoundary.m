@@ -8,6 +8,7 @@ function[sampleset,I] = getShadowBoundary(img,mask,brushsize)
 	startRow = 1;
 	sampleLength = 0;
 	sampling = false;
+    %N,E,S,W 0,1,2,3
 	direction = -1; 	
 	initialVal = -1;
 	sampleset = {};
@@ -19,9 +20,9 @@ function[sampleset,I] = getShadowBoundary(img,mask,brushsize)
 			if cPixelVal ~= lPixelVal && ~sampling
 				initialVal = lPixelVal;
 				if cPixelVal < lPixelVal
-					direction = 2;
+					direction = 1;
 				else
-					direction = 0;
+					direction = 3;
 				end
 				startCol = colnum;
 				startRow = rownum;
@@ -73,9 +74,9 @@ function[sampleset,I] = getShadowBoundary(img,mask,brushsize)
 			cPixelVal = mask(rownum,colnum);
 			if cPixelVal ~= lPixelVal && ~sampling
 				if cPixelVal < lPixelVal
-					direction = 1;
+					direction = 2;
 				else
-					direction = 3;
+					direction = 0;
 				end
 
 				startCol = colnum;
