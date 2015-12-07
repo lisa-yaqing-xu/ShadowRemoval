@@ -1,4 +1,4 @@
-function[c,ct,edge] = Clt(ts,pixelset,t1,t2,t) % ct = C(t)
+function[c,ct] = Clt(ts,pixelset,t1,t2,t) % ct = C(t)
     [d_,d] = size(pixelset);
     p_diff = diff(pixelset);
     
