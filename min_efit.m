@@ -3,8 +3,8 @@ function[t1,t2] = min_efit(ts,pixelset)
     [s_,ssize] = size(ts);  
     %%{
     min = 999999;
-    for i = 1:ssize-5
-        for j = i+1:i+5
+    for i = 3:ssize-4
+        for j = i+1:ssize-3
             efitval = e_fit(ts,pixelset,i,j);
             if efitval < min
                 min = efitval;
