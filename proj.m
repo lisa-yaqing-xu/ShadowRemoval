@@ -7,9 +7,10 @@ bwcopy = bw;
 %sampleset = [sampleStartColumn, sampleStartRow, sampleLength, sampleDirection]
 [s_,ssize] = size(sampleset);
 t1t2s = zeros(ssize,2);%3);
-for i = 1:ssize;
+for i = 1:1;%ssize;
     s = sampleset{i};
     [tvals, pxvals, indicies] = getSample(s,bw);
+    
     [t1,t2] = min_efit(tvals,pxvals);
      %{
     [d_,d] = size(pxvals);

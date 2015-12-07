@@ -13,3 +13,5 @@ but I do have a preliminary result where I just took the values of C(t) and appl
 it's kinda rough, though
 
 E_sm is set up too but entirely untested and unminimized
+
+Edit: set up C(t) to return a derivative as an option now

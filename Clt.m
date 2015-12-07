@@ -1,4 +1,4 @@
-function[c,ct] = Clt(ts,pixelset,t1,t2,t) % ct = C(t)
+function[c,ct] = Clt(ts,pixelset,t1,t2,t,diffr) % ct = C(t)
     [d_,d] = size(pixelset);
     p_diff = diff(pixelset);
     
@@ -37,9 +37,18 @@ function[c,ct] = Clt(ts,pixelset,t1,t2,t) % ct = C(t)
     if t < t1
         ct = 0;
     elseif t > t2;
-        ct = c;
+        if(diffr)
+            ct = 0;
+        else
+            ct = c;
+        end
     else
-        ct = cfit(t);
+        if(diffr)
+            ct = differentiate(cfit,t);
+        else
+            ct = cfit(t);
+        end
+        
     end
     edge = max_i;
     %plot(cfit);

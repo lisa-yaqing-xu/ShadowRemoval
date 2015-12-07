@@ -5,7 +5,7 @@ function [efit] = e_fit(ts,pixelset,t1,t2)
     normd = fitdist(transpose(grad),'Normal');
     for i = 2:ssize
         %calculate new gradient
-        [c,ct,edge] = Clt(ts, pixelset,t1,t2,i);
+        [c,ct] = Clt(ts, pixelset,t1,t2,i,1);
         grad_n = grad(i-1) - ct;
         efit = efit * fitness_measure(grad_n, normd.mu, normd.sigma);
     end  
