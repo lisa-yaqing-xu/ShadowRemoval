@@ -1,4 +1,4 @@
-function[] = getShadowBoundary(img,mask,brushsize)
+function[sampleset,I] = getShadowBoundary(img,mask,brushsize)
 	sampleLength = round(1.5 * brushsize);
 	I = rgb2gray(img);
    	[Gmag, Gdir] = imgradient(I,'sobel');
@@ -8,7 +8,7 @@ function[] = getShadowBoundary(img,mask,brushsize)
 	startRow = 1;
 	sampleLength = 0;
 	sampling = false;
-	direction = -1; %N,E,S,W = 0,1,2,3
+	direction = -1; 	
 	initialVal = -1;
 	sampleset = {};
 	for rownum=1:size(mask,1)
@@ -145,5 +145,5 @@ function[] = getShadowBoundary(img,mask,brushsize)
 		neighboredSample = [leftNeighborIndex, rightNeighborIndex];
 		neighboredIndexes = [neighboredIndexes, neighboredSample];
 	end
-	
+
    	%imshowpair(Gmag, Gdir, 'montage');
