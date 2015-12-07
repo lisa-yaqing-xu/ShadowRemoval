@@ -10,6 +10,8 @@ indices= zeros(slen,2);
 for i=1:slen+2
     tvals(1,i) = i;
     %N,E,S,W = 0,1,2,3 
+    %sr+1-(i-1)
+    %scol+1-(i-1)
     if(sdir == 3)
         pxvals(1,i) = img(sr,scol+1-(i-1));
         indices(i,1) = sr;
