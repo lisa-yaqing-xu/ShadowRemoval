@@ -1,5 +1,5 @@
-mask = imread('mask3.png');
-img = imread('img3.png');
+mask = imread('mask2.png');
+img = imread('img2.jpg');
 brushsize = 7; %brush size in pixels
 
 [sampleset,bw] = getShadowBoundary(img,mask,brushsize);
@@ -12,24 +12,21 @@ for i = 1:ssize;
     [tvals, pxvals, indicies] = getSample(s,bw);
     %[tvals, maskvals, indicies] = getSample(s,mask);
     [d_,d] = size(pxvals);
-    if(mask(indicies(1,1),indicies(1,2)) > mask(indicies(d,1),indicies(d,2)) )
-        [t1,t2] = min_efit(tvals,pxvals);  
-    else
-        t1 = -1;
-        t2 = -2;
-    end
+    [t1,t2] = min_efit(tvals,pxvals);  
     %%{
+    ctot = 0;
     for j = 2:d-1
         [c,ct] = Clt(tvals, pxvals,t1,t2,j,0);
         bwcopy(indicies(j,1),indicies(j,2)) = bwcopy(indicies(j,1),indicies(j,2))-ct;
+        ctot = ctot+c;
     end
     %}
     t1t2s(i,1) = t1;
     t1t2s(i,2) = t2;
-    t1t2s(i,3) = c;
+    t1t2s(i,3) = ctot/(d-2);
 end
 % test dummy code %
-%cmean = mean(t1t2s(:,3));
+cmean = mean(t1t2s(:,3));
 [w, h] = size(bwcopy);
 for i = 1:w
     for j = 1:h
