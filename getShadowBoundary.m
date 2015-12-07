@@ -113,6 +113,37 @@ function[] = getShadowBoundary(img,mask,brushsize)
 			end
 		end
 	end
+	
+	leftNeighborIndex = -1;
+	rightNeighborIndex = -1;
+	neighboredIndexes = {};
 
+	for col=1:size(sampleset,1)
+		curSample = sampleset(col);
+		for colInner=1:size(sampleset,1)
+			if col == colInner
+				continue;
+			end
+			neighborCandidate = sampleSet(colInner);
+			if neighborCandidate(4) == curSample(4)
+				if curSample(4) == 0 || curSample(4) == 2
+					if neighborCandidate(1) + 1 == curSample(1)
+						leftNeighborIndex = colInner
+					elseif neighborCandidate(1) - 1 == curSample(1)
+						rightNeighborIndex = colInner
+					end
+				else
+					if neighborCandidate(2) + 1 == curSample(1)
+						leftNeighborIndex = colInner
+					elseif neighborCandidate(2) - 1 == curSample(1)
+						rightNeighborIndex = colInner
+					end
+
+				end
+			end
+		end
+		neighboredSample = [leftNeighborIndex, rightNeighborIndex];
+		neighboredIndexes = [neighboredIndexes, neighboredSample];
+	end
+	
    	%imshowpair(Gmag, Gdir, 'montage');
-    
