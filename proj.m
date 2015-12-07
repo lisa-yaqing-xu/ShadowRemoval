@@ -7,7 +7,7 @@ brushsize = 7; %brush size in pixels
 [s_,ssize] = size(sampleset);
 for i = 1:ssize
     s = sampleset{i};
-    [tvals, pxvals] = getSample(s,bw);
+    [tvals, pxvals] = getSample(s,mask);
     pxvals
 end
 Clt(tvals, pxvals);
