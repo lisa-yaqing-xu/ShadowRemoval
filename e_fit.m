@@ -1,1 +1,1 @@
-function [efit] = e_fit(ts, pixelset, )
+function [efit] = e_fit(ts, pixelset)
