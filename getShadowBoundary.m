@@ -160,11 +160,13 @@ function[sampleset,I,neighboredIndexes] = getShadowBoundary(img,mask,brushsize)
 
 	for col=1:size(sampleset,2)
 		curSample = sampleset(col);
+        curSample = curSample{1};
 		for colInner=1:size(sampleset,2)
 			if col == colInner
 				continue;
 			end
-			neighborCandidate = sampleSet(colInner);
+			neighborCandidate = sampleset(colInner);
+            neighborCandidate = neighborCandidate{1};
 			if neighborCandidate(4) == curSample(4)
 				if curSample(4) == 0 || curSample(4) == 2
 					if neighborCandidate(1) + 1 == curSample(1)
