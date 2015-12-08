@@ -2,7 +2,32 @@ function[sampleset,I] = getShadowBoundary(img,mask,brushsize)
 	sampleLength = round(1.5 * brushsize);
 	I = rgb2gray(img);
    	[Gmag, Gdir] = imgradient(I,'sobel');
-	
+	maskColors = [-1 -1 -1];
+    maskColors(1) = mask(1, 1);
+    colorNum = 1;
+    
+    for rownum = 1:size(mask, 1)
+        for colnum = 1:size(mask,2)
+            newColor = true;
+            for maskCI=1:colorNum
+                if maskColors(maskCI) == mask(rownum, colnum)
+                    newColor = false;
+                end
+            end
+            if newColor
+                colorNum = colorNum + 1;
+                maskColors(colorNum) = mask(rownum, colnum);
+            end
+            if colorNum == 3
+                break;
+            end
+        end
+        if colorNum == 3
+            break;
+        end
+    end
+    maskColors = sort(maskColors);
+    
 	%first calculate y samples
 	startCol = 1;
 	startRow = 1;
@@ -17,7 +42,11 @@ function[sampleset,I] = getShadowBoundary(img,mask,brushsize)
 		for colnum=1:size(mask,2)
 			cPixelVal = mask(rownum,colnum);
 			if cPixelVal ~= lPixelVal && ~sampling
-				initialVal = lPixelVal;
+				if lPixelVal == maskColors(2)
+                    lPixelVal = cPixelVal;
+                    continue;
+                end
+                initialVal = lPixelVal;
 				if cPixelVal < lPixelVal
 					direction = 1;
 				else
@@ -75,6 +104,11 @@ function[sampleset,I] = getShadowBoundary(img,mask,brushsize)
 		for rownum=1:size(mask,1)
 			cPixelVal = mask(rownum,colnum);
 			if cPixelVal ~= lPixelVal && ~sampling
+                if lPixelVal == maskColors(2)
+                    lPixelVal = cPixelVal;
+                    continue;
+                end
+                initialVal = lPixelVal;
 				if cPixelVal < lPixelVal
 					direction = 2;
 				else
@@ -150,6 +184,6 @@ function[sampleset,I] = getShadowBoundary(img,mask,brushsize)
 		end
 		neighboredSample = [leftNeighborIndex, rightNeighborIndex];
 		neighboredIndexes = [neighboredIndexes, neighboredSample];
-	end
+    end
 
    	%imshowpair(Gmag, Gdir, 'montage');
