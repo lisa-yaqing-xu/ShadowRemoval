@@ -1,8 +1,8 @@
-mask = imread('mask2.png');
-img = imread('img2.jpg');
+mask = imread('mask1.png');
+img = imread('img.png');
 brushsize = 7; %brush size in pixels
 
-[sampleset,bw] = getShadowBoundary(img,mask,brushsize);
+[sampleset,bw,neighbors] = getShadowBoundary(img,mask,brushsize);
 bwcopy = bw;
 %sampleset = [sampleStartColumn, sampleStartRow, sampleLength, sampleDirection]
 [w, h] = size(bwcopy);
