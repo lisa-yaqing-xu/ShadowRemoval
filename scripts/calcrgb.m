@@ -58,7 +58,6 @@ for i = 1:gradshadnum
     Grad_nny(shad(1),shad(2)) = shadowgradtransf(gyH(shad(1),shad(2)), mu_ys, sigma_ys, mu_yt, sigma_yt);
 end
 
-
     
 imconstr = ImageRecH(Grad_nnx,Grad_nny,meanval,PoissonOn);
 newim = ImageRecH(Grad_nnx,Grad_nny,meanval,PoissonOn);

@@ -25,7 +25,7 @@ for i=1:slen+2
         indices(i,1) = sr;
         indices(i,2) = scol-1+(i-1);
     elseif(sdir == 2 )
-        pxvals(1,i) = img(sr-1+(i-1),scol);  
+        pxvals(1,i) = img(sr-1+(i-1),scol); 
         indices(i,1) = sr-1+(i-1);
         indices(i,2) = scol;
     end        

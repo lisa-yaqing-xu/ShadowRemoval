@@ -11,8 +11,6 @@ averagecr = zeros(w,h);
 averagecg = zeros(w,h);
 averagecb = zeros(w,h);
 
-
-
 t1t2r = zeros(ssize,3);
 t1t2g = zeros(ssize,3);
 t1t2b = zeros(ssize,3);

@@ -1,4 +1,4 @@
-function[t1,t2] = min_efit(ts,pixelset)
+function[t1,t2] = min_efit(ts,pixelset,grad)
     [t1,t2] = dummyt1t2(ts,pixelset);
     [s_,ssize] = size(ts);  
     %%{

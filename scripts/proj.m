@@ -1,7 +1,7 @@
 clearvars;
 
-filename = 'img2.jpg';
-maskname = 'mask2.png';
+filename = 'img.png';
+maskname = 'mask1.png';
 brushsize = 7;
 
 loaddata;
