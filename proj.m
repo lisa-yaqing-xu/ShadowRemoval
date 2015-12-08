@@ -1,5 +1,5 @@
-mask = imread('mask1.png');
-img = imread('img.png');
+mask = imread('mask2.png');
+img = imread('img2.jpg');
 brushsize = 7; %brush size in pixels
 
 [sampleset,bw] = getShadowBoundary(img,mask,brushsize);
@@ -47,8 +47,9 @@ for i = 1:w
     end
 end
 
-bwcopy = im2double(bwcopy)
-bwcopy = bwcopy + averagec;
+bwcopy = double(bwcopy);
+bwcopy = bwcopy - averagec;
+bwcopy = uint8(bwcopy);
 imshow(bwcopy);
 
 %}
