@@ -1,18 +1,10 @@
-mask = imread('mask1.png');
-img = imread('img.png');
-brushsize = 7; %brush size in pixels
-
-[sampleset,bw,neighbors] = getShadowBoundary(img,mask,brushsize);
-bwcopy = bw;
-%sampleset = [sampleStartColumn, sampleStartRow, sampleLength, sampleDirection]
-[w, h] = size(bwcopy);
-
-%testmethods
-%%{
+bw = rgb2gray(img);
+[w, h] = size(bw);
 visitedtimes = zeros(w,h);
 averagec = zeros(w,h);
-%}
+
 [s_,ssize] = size(sampleset);
+
 t1t2s = zeros(ssize,3);
 for i = 1:ssize;
     s = sampleset{i};
@@ -23,7 +15,7 @@ for i = 1:ssize;
     %%{
     ctot = 0;
     for j = 2:d-1
-        [c,ct] = Clt(tvals, pxvals,t1,t2,j,0);
+        [c,ct] = Clt(tvals, pxvals,t1,t2,j);
         averagec(indicies(j,1),indicies(j,2)) = averagec(indicies(j,1),indicies(j,2)) + ct;
         visitedtimes(indicies(j,1),indicies(j,2)) = visitedtimes(indicies(j,1),indicies(j,2)) + 1;
         ctot = ctot+c;
@@ -35,21 +27,3 @@ for i = 1:ssize;
 end
 visitedtimes(visitedtimes==0) = 1;
 averagec = averagec ./ visitedtimes;
-
-% test dummy code %
-cmean = mean(t1t2s(:,3));
-
-for i = 1:w
-    for j = 1:h
-        if mask(i,j) == 0
-            averagec(i,j) = averagec(i,j) + cmean;
-        end
-    end
-end
-
-bwcopy = double(bwcopy);
-bwcopy = bwcopy - averagec;
-bwcopy = uint8(bwcopy);
-imshow(bwcopy);
-
-%}

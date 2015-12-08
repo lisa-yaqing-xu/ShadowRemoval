@@ -1,4 +1,4 @@
-function[c,ct] = Clt(ts,pixelset,t1,t2,t,diffr) % ct = C(t)
+function[c,ct,dct] = Clt(ts,pixelset,t1,t2,t) % ct = C(t)
     [d_,d] = size(pixelset);
     illum = 0;
     for i = 1:t1;
@@ -16,19 +16,13 @@ function[c,ct] = Clt(ts,pixelset,t1,t2,t,diffr) % ct = C(t)
     [aa,bb,cc,dd] = solveCubic(t1,0,t2,c,0,0);
     if t < t1
         ct = 0;
+        dct = 0;
     elseif t > t2;
-        if(diffr)
-            ct = 0;
-        else
-            ct = c;
-        end
+         dct = 0;
+         ct = c;
     else
-        if(diffr)
-            ct = 3*aa*t^2 + 2*bb*t + cc;
-        else
-            ct = aa*t^3 + bb*t^2 + cc*t +dd;
-        end
-        
+         dct = 3*aa*t^2 + 2*bb*t + cc;
+         ct = aa*t^3 + bb*t^2 + cc*t +dd;
     end
     %edge = max_i;
     %plot(cfit);
