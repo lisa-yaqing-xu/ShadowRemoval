@@ -168,15 +168,15 @@ function[sampleset,I,neighboredIndexes] = getShadowBoundary(img,mask,brushsize)
 			if neighborCandidate(4) == curSample(4)
 				if curSample(4) == 0 || curSample(4) == 2
 					if neighborCandidate(1) + 1 == curSample(1)
-						leftNeighborIndex = colInner
+						leftNeighborIndex = colInner;
 					elseif neighborCandidate(1) - 1 == curSample(1)
-						rightNeighborIndex = colInner
+						rightNeighborIndex = colInner;
 					end
 				else
 					if neighborCandidate(2) + 1 == curSample(1)
-						leftNeighborIndex = colInner
+						leftNeighborIndex = colInner;
 					elseif neighborCandidate(2) - 1 == curSample(1)
-						rightNeighborIndex = colInner
+						rightNeighborIndex = colInner;
 					end
 
 				end
